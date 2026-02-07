@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISACA AAIR - Simulatore Esame (Versione Estesa)</title>
+
+<style>
+:root {
+  --isaca-blue: #004a99;
+  --isaca-light-blue: #e6f0fa;
+  --correct-green: #28a745;
+  --error-red: #dc3545;
+  --text-dark: #333;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f9;
+  padding: 20px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-top: 8px solid var(--isaca-blue);
+}
+h1 {
+  color: var(--isaca-blue);
+  text-align: center;
+  margin-bottom: 20px;
+}
+.stats {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: var(--isaca-light-blue);
+  border-radius: 8px;
+}
+.option {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
+}
+.correct {
+  background-color: var(--correct-green) !important;
+  color: white !important;
+}
+.wrong {
+  background-color: var(--error-red) !important;
+  color: white !important;
+}
+#next-btn {
+  display: none;
+  width: 100%;
+  padding: 15px;
+  background: var(--isaca-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+.report-card {
+  padding: 25px;
+  border: 2px solid var(--isaca-blue);
+  background: var(--isaca-light-blue);
+  border-radius: 10px;
+  text-align: center;
+}
+.start-btn {
+  padding: 15px 40px;
+  background: var(--isaca-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+ul.error-list {
+  text-align: left;
+  margin-top: 20px;
+}
+ul.error-list li {
+  padding: 10px;
+  background: #fff3f3;
+  border-left: 4px solid #dc3545;
+  margin-bottom: 10px;
+  list-style: none;
+}
+.green { color: #28a745; font-weight: bold; }
+.red { color: #dc3545; font-weight: bold; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div id="setup-section" style="text-align: center;">
+	<h1 style="text-align:center;">AAIR&reg; Practice Simulator</h1>
+	<p style="text-align:center; font-style: italic;">An independent study tool for Advanced AI Risk management</p>
+    <p><h2>Ready to exercise? <br>Select the number of questions:</h2></p>
+        <select id="num-questions">
+            <option value="10">10 questions</option>
+            <option value="20">20 questions</option>
+            <option value="50" selected>50 questions</option>
+            <option value="100">100 questions</option>
+            <option value="600">Full Database</option>
+        </select>
+        <br><br><br>
+        <button class="start-btn" onclick="inizializzaQuiz()">Start Test</button>
+    </div>
+
+<!-- =================== QUIZ =================== -->
+<div id="quiz-section" style="display:none;">
+  <h1>AAIR Exam Simulator</h1>
+  <div class="stats">
+    <span>Question: <span id="current-count">0</span> / <span id="total-count">0</span></span>
+    <span>Score: <span id="score">0</span></span>
+  </div>
+
+  <div id="question-container">
+    <p id="question-text" style="font-size:1.3rem; font-weight:bold; margin-bottom:20px;"></p>
+    <div id="options-container"></div>
+  </div>
+
+  <button id="next-btn" onclick="nextQuestion()">Next Question</button>
+</div>
+
+<!-- =================== REPORT =================== -->
+<div id="report" style="display:none;"></div>
+
+</div>
+
+<script src="questionDB.js">
+</script>
+<footer>
+    <div class="disclaimer-box" style="margin-top: 50px; padding: 20px; font-size: 0.75em; color: #555; text-align: center; border-top: 1px solid #ccc; line-height: 1.5;">
+        <p><strong>INTELLECTUAL PROPERTY NOTICE</strong></p>
+        <p><strong>AAIR&reg; (Advanced AI Risk)</strong> is a registered trademark and framework owned by <strong>ISACA&reg;</strong>.</p>
+        <p>This application is an independent practice tool developed for educational purposes. 
+        It is hereby stated that: 
+        <br>1. The questions and content provided herein <strong>are not extracted from official ISACA exam databases</strong>. 
+        <br>2. This software is not affiliated with, endorsed by, or sponsored by ISACA. 
+        <br>3. Use of this simulator does not guarantee passing any official certification exam.
+		<br>4. For questions, suggestions etc. etc. <a href="mailto:pierluigi@psartori.it">pierluigi@psartori.it</a>.</p>
+        <p>&copy; 2024-2026 Independent Educational Simulation Project by P. Sartori.</p>
+    </div>
+</footer>
+</body>
+</html>
